@@ -70,8 +70,10 @@
                             </label>
                             <select name="packet_grooming" class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-last-name">
                                 <option value="{{ $item->packet_grooming }}">{{ $item->packet_grooming }}</option>
-                                <option value="Original">Original</option>
+                                <option value="Basic">Basic</option>
                                 <option value="Kutu">Kutu</option>
+                                <option value="Jamur">Jamur</option>
+                                <option value="Kombinasi (Jamur Dan Kutu)">Kombinasi (Jamur Dan Kutu)</option>
                             </select>
                         </div>
                     </div>

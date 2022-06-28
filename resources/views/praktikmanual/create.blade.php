@@ -67,7 +67,21 @@
                             <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-last-name">
                                 Gejala Pertama
                             </label>
-                            <input value="{{ old('first_symptom') }}" name="first_symptom" class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-last-name" type="text" placeholder="Gejala Pertama">
+                            <select name="first_symptom" class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-last-name">
+                                <option value="">-- Pilih Gejala Hewan --</option>
+                                <option value="Bersin - Bersin">Bersin - Bersin</option>
+                                <option value="Demam">Demam</option>
+                                <option value="Benjolan">Benjolan</option>
+                                <option value="Pembengkakan">Pembengkakan</option>
+                                <option value="Kehilangan Selera Makan">Kehilangan Selera Makan</option>
+                                <option value="Muntah - Muntah">Muntah</option>
+                                <option value="Bulu Rontok">Bulu Rontok</option>
+                                <option value="Infeksi Mata">Infeksi Mata</option>
+                                <option value="Gusi Berdarah">Gusi Berdarah</option>
+                                <option value="Penurunan Berat Badan">Penurunan Berat Badan</option>
+                                <option value="Kejang - Kejang">Kejang-Kejang</option>
+                                <option value="Pingsan">Pingsan</option>
+                            </select>
                         </div>
                     </div>
 
@@ -76,7 +90,21 @@
                             <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-last-name">
                                 Gejala Kedua
                             </label>
-                            <input value="{{ old('second_symptom') }}" name="second_symptom" class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-last-name" type="text" placeholder="Gejala Kedua">
+                            <select name="second_symptom" class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-last-name">
+                                <option value="">-- Pilih Gejala Hewan --</option>
+                                <option value="Bersin - Bersin">Bersin - Bersin</option>
+                                <option value="Demam">Demam</option>
+                                <option value="Benjolan">Benjolan</option>
+                                <option value="Pembengkakan">Pembengkakan</option>
+                                <option value="Kehilangan Selera Makan">Kehilangan Selera Makan</option>
+                                <option value="Muntah - Muntah">Muntah</option>
+                                <option value="Bulu Rontok">Bulu Rontok</option>
+                                <option value="Infeksi Mata">Infeksi Mata</option>
+                                <option value="Gusi Berdarah">Gusi Berdarah</option>
+                                <option value="Penurunan Berat Badan">Penurunan Berat Badan</option>
+                                <option value="Kejang - Kejang">Kejang-Kejang</option>
+                                <option value="Pingsan">Pingsan</option>
+                            </select>
                         </div>
                     </div>
 

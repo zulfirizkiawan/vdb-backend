@@ -29,10 +29,11 @@
                     @forelse($penitipanmanual as $item)
                         <tr>
                             <td class="border px-6 py-4 text-center">{{ $item->id }}</td>
-                            <td class="border px-6 py-4 ">{{ $item->customer_name }}</td>
-                            <td class="border px-6 py-4">{{ $item->animal_type }}</td>
-                            <td class="border px-6 py-4">{{ date('Y-m-d', $item->created_at) }}</td>
-                            <td class="border px-6 py-4">{{ $item->tanggal_pengembalian }}</td>
+                            <td class="border px-6 py-4 text-center">{{ $item->customer_name }}</td>
+                            <td class="border px-6 py-4 text-center">{{ $item->animal_type }}</td>
+                            <td class="border px-6 py-4 text-center">{{ date('Y-m-d', $item->created_at) }}</td>
+                            <td class="border px-6 py-4 text-center">{{  date('Y-m-d', strtotime($item->tanggal_pengembalian)) }}</td>
+                            {{-- <td class="border px-6 py-4 text-center">{{ $item->tanggal_pengembalian }}</td> --}}
                             <td class="border px-6 py-4 text-center">{{ number_format($item->price) }}</td>
                             <td class="border px-6 py-3" style=" display:flex; align-items:center; justify-content: space-evenly;">
                                 <a href="{{ route('penitipanmanual.show', $item->id) }}" class="text-white font-bold py-2 px-4 rounded" style="background-color: #d2d43c;">
