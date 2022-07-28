@@ -29,7 +29,7 @@ class DoctorController extends Controller
      */
     public function create()
     {
-        //
+        return view('doctor.create');
     }
 
     /**
@@ -38,9 +38,15 @@ class DoctorController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(DoctorRequest $request)
     {
-        //
+        $data = $request->all();
+
+        $data['doctor_photo_path'] = $request->file('doctor_photo_path')->store('assets/food', 'public');
+
+        Doctor::create($data);
+
+        return redirect()->route('doctor.index');
     }
 
     /**

@@ -3,10 +3,15 @@
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
             {{ __('Dokter') }}
         </h2>
-    </x-slot>
+    </x-slot> 
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+            <div class="mb-18">
+                <a href="{{ route('doctor.create') }}" class="text-white font-bold py-2 px-4 rounded" style="background-color: #22b43a;">
+                    + Create Dokter
+                </a>
+           </div>
            <div class="bg-white mt-8">
             <table class="table-auto w-full">
                 <thead>

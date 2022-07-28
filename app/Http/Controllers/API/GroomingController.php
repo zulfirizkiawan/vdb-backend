@@ -99,6 +99,19 @@ class GroomingController extends Controller
 
         $transaction = TransactionGrooming::with(['user'])->find($transaction->id);
 
+        // $midtrans = [
+        //     'transaction_details' => array(
+        //         'order_id' =>  $transaction->id,
+        //         'gross_amount' => (int) $transaction->total,
+        //     ),
+        //     'customer_details' => array(
+        //         'first_name'    => $transaction->user->name,
+        //         'email'         => $transaction->user->email
+        //     ),
+        //     'enabled_payments' => array('gopay', 'bank_transfer'),
+        //     'vtweb' => array()
+        // ];
+
         $midtrans = array(
             'transaction_details' => array(
                 'order_id' =>  $transaction->id,

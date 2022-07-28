@@ -30,4 +30,13 @@ class DiscountController extends Controller
                 );
         }
     }
+
+    public function update(Request $request, $id)
+    {
+        $transaction = Diskon::findOrFail($id);
+
+        $transaction->update($request->all());
+
+        return ResponseFormatter::success($transaction, 'Diskon berhasil diperbarui');
+    }
 }

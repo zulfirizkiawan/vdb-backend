@@ -12,7 +12,7 @@ class Doctor extends Model
     use HasFactory;
 
     protected $fillable = [
-        'name', 'workplace', 'doctor_specialist', 'gender ', 'phoneNumber ', 'price ',
+        'name', 'workplace', 'doctor_specialist', 'gender', 'phoneNumber', 'price',
         'doctor_photo_path'
     ];
 
@@ -26,7 +26,7 @@ class Doctor extends Model
         return Carbon::parse($value)->timestamp;
     }
 
-    public function getDoctorPathAttribute()
+    public function getDoctorPhotoPathAttribute()
     {
         return url('') . Storage::url($this->attributes['doctor_photo_path']);
     }

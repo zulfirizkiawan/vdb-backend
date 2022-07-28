@@ -52,6 +52,7 @@ Route::post('register', [UserController::class, 'register']);
 Route::get('food', [FoodController::class, 'all']);
 
 Route::get('discount', [DiscountController::class, 'all']);
+Route::post('discount/{id}', [DiscountController::class, 'update']);
 
 Route::get('doctor', [DoctorController::class, 'all']);
 
