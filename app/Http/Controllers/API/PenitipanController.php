@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Midtrans\Config;
 use Illuminate\Support\Facades\Auth;
 use Midtrans\Snap;
+use Illuminate\Support\Facades\Storage;
 
 class PenitipanController extends Controller
 {
@@ -74,7 +75,12 @@ class PenitipanController extends Controller
             'shipping_cost' => 'required',
             'discount' => 'required',
             'total' => 'required',
+            'image' => 'required|image:jpeg,png,jpg,gif,svg',
         ]);
+
+        $image = $request->file('image');
+        $image_uploaded_path = $image->store('penitipan', 'public');
+        $path_url = Storage::disk('public')->url($image_uploaded_path);
 
         $transaction = TransactionPenitipan::create([
             'user_id' => $request->user_id,
@@ -89,7 +95,8 @@ class PenitipanController extends Controller
             'shipping_cost' => $request->shipping_cost,
             'discount' => $request->discount,
             'total' => $request->total,
-            'payment_url' => ''
+            'payment_url' => '',
+            'penitipan_photo_path' => $path_url,
         ]);
 
         // Konfigurasi midtrans

@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Midtrans\Config;
 use Midtrans\Snap;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class PraktikController extends Controller
 {
@@ -73,7 +74,12 @@ class PraktikController extends Controller
             'shipping_cost' => 'required',
             'discount' => 'required',
             'total' => 'required',
+            'image' => 'required|image:jpeg,png,jpg,gif,svg',
         ]);
+
+        $image = $request->file('image');
+        $image_uploaded_path = $image->store('praktik', 'public');
+        $path_url = Storage::disk('public')->url($image_uploaded_path);
 
         $transaction = TransactionPraktik::create([
             'user_id' => $request->user_id,
@@ -90,7 +96,8 @@ class PraktikController extends Controller
             'shipping_cost' => $request->shipping_cost,
             'discount' => $request->discount,
             'total' => $request->total,
-            'payment_url' => ''
+            'payment_url' => '',
+            'praktik_photo_path' => $path_url,
         ]);
 
         // Konfigurasi midtrans
