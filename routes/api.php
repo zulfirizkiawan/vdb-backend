@@ -57,3 +57,13 @@ Route::post('discount/{id}', [DiscountController::class, 'update']);
 Route::get('doctor', [DoctorController::class, 'all']);
 
 Route::post('midtrans/callback', [MidtransController::class, 'callback']);
+
+
+Route::get('allGrooming', [GroomingController::class, 'allGrooming']);
+Route::post('allGrooming/{id}', [GroomingController::class, 'updateGrooming']);
+
+Route::get('allPenitipan', [PenitipanController::class, 'allPenitipan']);
+Route::post('allPenitipan/{id}', [PenitipanController::class, 'updatePenitipan']);
+
+Route::get('allPraktik', [PraktikController::class, 'allPraktik']);
+Route::post('allPraktik/{id}', [PraktikController::class, 'updatePraktik']);

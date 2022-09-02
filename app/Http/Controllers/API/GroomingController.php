@@ -60,6 +60,7 @@ class GroomingController extends Controller
 
     public function checkoutgrooming(Request $request)
     {
+
         $request->validate([
             'user_id' => 'required|exists:users,id',
             'animal_name' => 'required',
@@ -106,7 +107,7 @@ class GroomingController extends Controller
 
         $transaction = TransactionGrooming::with(['user'])->find($transaction->id);
 
-        // $midtrans = [
+        // $midtrans = array(
         //     'transaction_details' => array(
         //         'order_id' =>  $transaction->id,
         //         'gross_amount' => (int) $transaction->total,
@@ -117,26 +118,13 @@ class GroomingController extends Controller
         //     ),
         //     'enabled_payments' => array('gopay', 'bank_transfer'),
         //     'vtweb' => array()
-        // ];
-
-        $midtrans = array(
-            'transaction_details' => array(
-                'order_id' =>  $transaction->id,
-                'gross_amount' => (int) $transaction->total,
-            ),
-            'customer_details' => array(
-                'first_name'    => $transaction->user->name,
-                'email'         => $transaction->user->email
-            ),
-            'enabled_payments' => array('gopay', 'bank_transfer'),
-            'vtweb' => array()
-        );
+        // );
 
         try {
             // Ambil halaman payment midtrans
-            $paymentUrl = Snap::createTransaction($midtrans)->redirect_url;
+            // $paymentUrl = Snap::createTransaction($midtrans)->redirect_url;
 
-            $transaction->payment_url = $paymentUrl;
+            // $transaction->payment_url = $paymentUrl;
             $transaction->save();
 
             // Redirect ke halaman midtrans
@@ -144,5 +132,48 @@ class GroomingController extends Controller
         } catch (Exception $e) {
             return ResponseFormatter::error($e->getMessage(), 'Transaksi Gagal');
         }
+    }
+
+    public function allGrooming(Request $request)
+    {
+
+        $id = $request->input('id');
+        $limit = $request->input('limit', 20);
+        $status = $request->input('status');
+
+        if ($id) {
+            $transaction = TransactionGrooming::find($id);
+
+            if ($transaction)
+                return ResponseFormatter::success(
+                    $transaction,
+                    'Data transaksi grooming berhasil diambil'
+                );
+            else
+                return ResponseFormatter::error(
+                    null,
+                    'Data transaksi tidak ada',
+                    404
+                );
+        }
+        $transaction = TransactionGrooming::with(['user'])->where($id);
+        // $transaction = TransactionGrooming::where($id);
+
+        if ($status)
+            $transaction->where('status', $status);
+
+        return ResponseFormatter::success(
+            $transaction->paginate($limit),
+            'Data list transaksi grooming berhasil diambil'
+        );
+    }
+
+    public function updateGrooming(Request $request, $id)
+    {
+        $transaction = TransactionGrooming::findOrFail($id);
+
+        $transaction->update($request->all());
+
+        return ResponseFormatter::success($transaction, 'Grooming berhasil diperbarui');
     }
 }

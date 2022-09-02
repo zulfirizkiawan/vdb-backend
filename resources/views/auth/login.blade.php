@@ -1,7 +1,8 @@
 <x-guest-layout>
     <x-jet-authentication-card>
         <x-slot name="logo">
-            <x-jet-authentication-card-logo />
+            {{-- <x-jet-authentication-card-logo /> --}}
+            <img src="https://scontent-sin6-1.xx.fbcdn.net/v/t31.18172-8/13112980_1023379507743565_1840081445586071543_o.jpg?_nc_cat=111&ccb=1-7&_nc_sid=9267fe&_nc_ohc=5nYeIBgv1aMAX_nkW78&_nc_oc=AQmgFG1FBl_Opr9uvYXc4qnDxfU46HF52Jj1BC5Z3mYRlJ7bRjVSdmXuiStWBSrlYVM&_nc_ht=scontent-sin6-1.xx&oh=00_AT-RVAzkevtje_ofIKJsAaHYn8U1m-G4A15O0yNNsMcbhg&oe=631574B6" style="border-radius: 50%; height: 220px;width: 300px;" class="css-class" alt="alt text">
         </x-slot>
 
         <x-jet-validation-errors class="mb-4" />

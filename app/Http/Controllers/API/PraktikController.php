@@ -135,4 +135,47 @@ class PraktikController extends Controller
             return ResponseFormatter::error($e->getMessage(), 'Transaksi Gagal');
         }
     }
+
+    public function allPraktik(Request $request)
+    {
+        $id = $request->input('id');
+        $limit = $request->input('limit', 20);
+        $status = $request->input('status');
+
+        if ($id) {
+            $transaction = TransactionPraktik::find($id);
+
+            if ($transaction)
+                return ResponseFormatter::success(
+                    $transaction,
+                    'Data transaksi praktik berhasil diambil'
+                );
+            else
+                return ResponseFormatter::error(
+                    null,
+                    'Data transaksi tidak ada',
+                    404
+                );
+        }
+
+        // $transaction = TransactionPraktik::where($id);
+        $transaction = TransactionPraktik::with(['user'])->where($id);
+
+        if ($status)
+            $transaction->where('status', $status);
+
+        return ResponseFormatter::success(
+            $transaction->paginate($limit),
+            'Data list transaksi praktik berhasil diambil'
+        );
+    }
+
+    public function updatePraktik(Request $request, $id)
+    {
+        $transaction = TransactionPraktik::findOrFail($id);
+
+        $transaction->update($request->all());
+
+        return ResponseFormatter::success($transaction, 'Praktik berhasil diperbarui');
+    }
 }

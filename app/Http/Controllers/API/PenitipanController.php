@@ -134,4 +134,46 @@ class PenitipanController extends Controller
             return ResponseFormatter::error($e->getMessage(), 'Transaksi Gagal');
         }
     }
+
+    public function allPenitipan(Request $request)
+    {
+        $id = $request->input('id');
+        $limit = $request->input('limit', 20);
+        $status = $request->input('status');
+
+        if ($id) {
+            $transaction = TransactionPenitipan::find($id);
+
+            if ($transaction)
+                return ResponseFormatter::success(
+                    $transaction,
+                    'Data transaksi penitipan berhasil diambil'
+                );
+            else
+                return ResponseFormatter::error(
+                    null,
+                    'Data transaksi tidak ada',
+                    404
+                );
+        }
+        $transaction = TransactionPenitipan::with(['user'])->where($id);
+        // $transaction = TransactionPenitipan::where($id);
+
+        if ($status)
+            $transaction->where('status', $status);
+
+        return ResponseFormatter::success(
+            $transaction->paginate($limit),
+            'Data list transaksi penitipan berhasil diambil'
+        );
+    }
+
+    public function updatePenitipan(Request $request, $id)
+    {
+        $transaction = TransactionPenitipan::findOrFail($id);
+
+        $transaction->update($request->all());
+
+        return ResponseFormatter::success($transaction, 'Penitipan berhasil diperbarui');
+    }
 }
