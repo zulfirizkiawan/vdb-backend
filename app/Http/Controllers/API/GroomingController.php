@@ -78,8 +78,8 @@ class GroomingController extends Controller
         ]);
 
         $image = $request->file('image');
-        $image_uploaded_path = $image->store('grooming', 'public');
-        $path_url = Storage::disk('public')->url($image_uploaded_path);
+        $image_uploaded_path = $image->store('assets/grooming', 'public');
+        // $path_url = Storage::disk('public')->url($image_uploaded_path);
 
         $transaction = TransactionGrooming::create([
             'user_id' => $request->user_id,
@@ -95,7 +95,7 @@ class GroomingController extends Controller
             'discount' => $request->discount,
             'total' => $request->total,
             'payment_url' => '',
-            'grooming_photo_path' => $path_url,
+            'grooming_photo_path' => $image_uploaded_path,
         ]);
 
         // Konfigurasi midtrans

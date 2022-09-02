@@ -78,8 +78,8 @@ class PraktikController extends Controller
         ]);
 
         $image = $request->file('image');
-        $image_uploaded_path = $image->store('praktik', 'public');
-        $path_url = Storage::disk('public')->url($image_uploaded_path);
+        $image_uploaded_path = $image->store('assets/praktik', 'public');
+        // $path_url = Storage::disk('public')->url($image_uploaded_path);
 
         $transaction = TransactionPraktik::create([
             'user_id' => $request->user_id,
@@ -97,7 +97,7 @@ class PraktikController extends Controller
             'discount' => $request->discount,
             'total' => $request->total,
             'payment_url' => '',
-            'praktik_photo_path' => $path_url,
+            'praktik_photo_path' => $image_uploaded_path,
         ]);
 
         // Konfigurasi midtrans
@@ -109,24 +109,24 @@ class PraktikController extends Controller
 
         $transaction = TransactionPraktik::with(['doctor', 'user'])->find($transaction->id);
 
-        $midtrans = array(
-            'transaction_details' => array(
-                'order_id' =>  $transaction->id,
-                'gross_amount' => (int) $transaction->total,
-            ),
-            'customer_details' => array(
-                'first_name'    => $transaction->user->name,
-                'email'         => $transaction->user->email
-            ),
-            'enabled_payments' => array('gopay', 'bank_transfer'),
-            'vtweb' => array()
-        );
+        // $midtrans = array(
+        //     'transaction_details' => array(
+        //         'order_id' =>  $transaction->id,
+        //         'gross_amount' => (int) $transaction->total,
+        //     ),
+        //     'customer_details' => array(
+        //         'first_name'    => $transaction->user->name,
+        //         'email'         => $transaction->user->email
+        //     ),
+        //     'enabled_payments' => array('gopay', 'bank_transfer'),
+        //     'vtweb' => array()
+        // );
 
         try {
             // Ambil halaman payment midtrans
-            $paymentUrl = Snap::createTransaction($midtrans)->redirect_url;
+            // $paymentUrl = Snap::createTransaction($midtrans)->redirect_url;
 
-            $transaction->payment_url = $paymentUrl;
+            // $transaction->payment_url = $paymentUrl;
             $transaction->save();
 
             // Redirect ke halaman midtrans
